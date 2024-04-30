@@ -112,14 +112,19 @@ export class BookService {
         const sellBook = { ...book };
         delete sellBook.id;
         sellBook.userId = sub;
+        sellBook.amount = 1;
+
+        /* Tentativa de buscar o livro do repositorio e atualizar se já existir
         if (
           await this.bookRepository.find({
             where: { userId: sub, name: sellBook.name },
           })
         ) {
-          console.log(await this.bookRepository.find({
-            where: { userId: sub, name: sellBook.name },
-          }));
+          console.log(
+            await this.bookRepository.find({
+              where: { userId: sub, name: sellBook.name },
+            }),
+          );
           sellBook.amount++;
           await this.update(sub, sellBook, req, true);
         } else {
@@ -127,13 +132,14 @@ export class BookService {
           await this.create(sellBook);
         }
         console.log(sellBook);
+        */
 
         book.amount--;
 
-        console.log('erro1');
+        //console.log('erro1');
         console.log(book);
         await this.update(book.id, book, req, true);
-        console.log('erro2');
+        //console.log('erro2');
 
         return sellBook;
       } else {
